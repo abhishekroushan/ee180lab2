@@ -58,7 +58,7 @@ void sobelCalc(Mat& img_gray, Mat& img_sobel_out)
   unsigned short sobel;
 
   // Calculate the x convolution
-  for (int i=1; i<img_gray.rows; i++) {
+  for (int i=1; i<img_gray.rows-1; i++) {
     for (int j=1; j<img_gray.cols; j++) {
       sobel = abs(img_gray.data[IMG_WIDTH*(i-1) + (j-1)] -
 		  img_gray.data[IMG_WIDTH*(i+1) + (j-1)] +
@@ -73,7 +73,7 @@ void sobelCalc(Mat& img_gray, Mat& img_sobel_out)
   }
 
   // Calc the y convolution
-  for (int i=1; i<img_gray.rows; i++) {
+  for (int i=1; i<img_gray.rows-1; i++) {
     for (int j=1; j<img_gray.cols; j++) {
      sobel = abs(img_gray.data[IMG_WIDTH*(i-1) + (j-1)] -
 		   img_gray.data[IMG_WIDTH*(i-1) + (j+1)] +
@@ -89,7 +89,7 @@ void sobelCalc(Mat& img_gray, Mat& img_sobel_out)
   }
 
   // Combine the two convolutions into the output image
-  for (int i=1; i<img_gray.rows; i++) {
+  for (int i=1; i<img_gray.rows-1; i++) {
     for (int j=1; j<img_gray.cols; j++) {
       sobel = img_outx.data[IMG_WIDTH*(i) + j] +
 	img_outy.data[IMG_WIDTH*(i) + j];
@@ -110,7 +110,7 @@ void sobelCalcMt(Mat& img_gray, Mat& img_sobel_out, int start, int end)
 //
   // Calculate the x convolution
   for (int i=start+1; i<end; i++) {
-    for (int j=1; j<img_gray.cols-1; j++) {
+    for (int j=1; j<img_gray.cols; j++) {
       sobel = abs(img_gray.data[IMG_WIDTH*(i-1) + (j-1)] -
 		  img_gray.data[IMG_WIDTH*(i+1) + (j-1)] +
 		  2*img_gray.data[IMG_WIDTH*(i-1) + (j)] -
@@ -125,7 +125,7 @@ void sobelCalcMt(Mat& img_gray, Mat& img_sobel_out, int start, int end)
 //
   // Calc the y convolution
   for (int i=start+1; i<end; i++) {
-    for (int j=1; j<img_gray.cols-1; j++) {
+    for (int j=1; j<img_gray.cols; j++) {
      sobel = abs(img_gray.data[IMG_WIDTH*(i-1) + (j-1)] -
 		   img_gray.data[IMG_WIDTH*(i-1) + (j+1)] +
 		   2*img_gray.data[IMG_WIDTH*(i) + (j-1)] -
@@ -141,7 +141,7 @@ void sobelCalcMt(Mat& img_gray, Mat& img_sobel_out, int start, int end)
 //
   // Combine the two convolutions into the output image
   for (int i=start+1; i<end; i++) {
-    for (int j=1; j<img_gray.cols-1; j++) {
+    for (int j=1; j<img_gray.cols; j++) {
       sobel = img_outx.data[IMG_WIDTH*(i) + j] +
 	img_outy.data[IMG_WIDTH*(i) + j];
       sobel = (sobel > 255) ? 255 : sobel;
@@ -149,4 +149,3 @@ void sobelCalcMt(Mat& img_gray, Mat& img_sobel_out, int start, int end)
     }
   }
 }
-

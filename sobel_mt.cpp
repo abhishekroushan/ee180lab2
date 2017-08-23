@@ -142,7 +142,6 @@ void *runSobelMT(void *ptr)
     total_fps += PROC_FREQ/float(cap_time + disp_time + gray_time + sobel_time);
     total_ipc += float(sobel_ic/float(cap_time + disp_time + gray_time + sobel_time));
     i++;
-
     // Press q to exit
     char c = cvWaitKey(10);
     if (c == 'q' || i >= opts.numFrames) {
@@ -172,6 +171,6 @@ void *runSobelMT(void *ptr)
 
   cvReleaseCapture(&video_cap);
   results_file.close();
-  //pthread_barrier_wait(&endSobel);
+  pthread_barrier_wait(&endSobel);
   return NULL;
 }

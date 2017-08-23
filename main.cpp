@@ -110,6 +110,7 @@ int mainMultiThread()
     exit(1);
   }
   //Barrier wait added for sync
+ 
   pthread_barrier_wait(&grayBarr);
   pthread_barrier_wait(&sobelBarr);
   pthread_barrier_wait(&endSobel);
