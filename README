@@ -1,0 +1,85 @@
+Name: Ketan Pant
+Partner: Abhishek Roushan
+Host name: ee180-40z.stanford.edu
+
+Assignement tasks:
+
+1. Single thread optimizations
+	Compiler optimization:
+		Flags:
+			CFLAGS+=-Wall -O3 -c
+			ARMCMD= -mcpu=cortex-a9 -mfloat-abi=hard -mfpu=neon -ftree-vectorize
+		Result obtained:
+			Percent of time per function
+			Capture, 11.2617%
+			Grayscale, 27.0228%
+			Sobel, 56.4857%
+			Display, 5.22984%
+			
+			Summary
+			Frames per second, 20.5283
+			Cycles per frame, 4.2353e+07
+			Energy per frames (mJ), 68.1987
+			Total frames, 70
+			
+			Hardware Stats (Cap + Gray + Sobel + Display)
+			Instructions per cycle, 0.922809
+			L1 misses per frame, 202049
+			L1 misses per instruction, 0.00517714
+			Instruction count per frame, 3.90271e+07
+
+
+	Compiler and code restructure:
+		File: sobel_calc.cpp-(function: grayscale())
+		Result obtained:
+			Percent of time per function
+			Capture, 12.5969%
+			Grayscale, 18.1325%
+			Sobel, 63.2246%
+			Display, 6.046%
+			
+			Summary
+			Frames per second, 22.9863
+			Cycles per frame, 3.78628e+07
+			Energy per frames (mJ), 60.9058
+			Total frames, 70
+			
+			Hardware Stats (Cap + Gray + Sobel + Display)
+			Instructions per cycle, 0.999626
+			L1 misses per frame, 201162
+			L1 misses per instruction, 0.00532631
+			Instruction count per frame, 3.77676e+07
+
+
+2. Multi thread optimizations:
+
+	Note:
+	We ran the implemented version of multi-thread sobel filter and got the results 
+	as given below. However, we get segmentation fault sometimes, the behaviour of which
+	is inconsistent. 
+	Therefore, we are including the results when our code executed and got completed.
+
+	Compiler and code restructure:
+		File: sobel_calc.cpp -(function:sobelcalcMt() and grayscaleMt() added)
+		      sobel_mt.cpp -(addition of thread synchronization)
+		Result obtained:
+			Percent of time per function
+			Capture, 21.9415%
+			Grayscale, 17.3342%
+			Sobel, 50.9734%
+			Display, 9.75091%
+			
+			Summary
+			Frames per second, 74.3183
+			Cycles per frame, 3.84205e+07
+			Energy per frames (mJ), 18.8379
+			Total frames, 70
+			
+			Hardware Stats (Cap + Gray + Sobel + Display)
+			Instructions per cycle, 1.79252
+			L1 misses per frame, 266460
+			L1 misses per instruction, 0.00711579
+			Instruction count per frame, 3.74463e+07
+
+
+
